@@ -1,0 +1,63 @@
+.employee {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  .form-wrapper {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    form {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      width: 220px;
+      margin: auto auto;
+      h2 {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      label {
+        font-weight: 600;
+      }
+      input {
+        padding: 10px 15px;
+        margin: 10px 0;
+        display: inline-block;
+        border: 1px solid #938b8b;
+        border-radius: 5px;
+        transition: 0.3s ease-in-out;
+      }
+      input::placeholder {
+        font-style: italic;
+      }
+      input[type="submit"] {
+        background-color: #1f88f1;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        background-color: #0ba30b;
+      }
+    }
+  }
+  .data-wrapper {
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    table {
+      thead {
+        tr {
+          text-align: center;
+        }
+      }
+      tbody {
+        tr {
+          text-align: center;
+        }
+      }
+    }
+  }
+}

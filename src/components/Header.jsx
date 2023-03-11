@@ -3,35 +3,35 @@ import { Link, useLocation } from "react-router-dom";
 import "./header.scss";
 
 const Header = () => {
-  const [activeTab, setActiveTab] = useState("Home");
+  const [activeTab, setActiveTab] = useState("Employees");
   const location = useLocation();
 
   useEffect(() => {
     if (location.pathname === "/") {
-      setActiveTab("Home");
-    } else if (location.pathname === "/add") {
-      setActiveTab("AddEmployee");
+      setActiveTab("Employees");
+    } else if (location.pathname === "/tasks") {
+      setActiveTab("Tasks");
     }
   }, [location]);
-  
+
   return (
     <div className="header">
       <p className="logo">CRUD App</p>
       <div className="header-right">
         <Link to="/">
           <p
-            className={`${activeTab === "Home" ? "active" : ""}`}
+            className={`${activeTab === "Employees" ? "active" : ""}`}
             onClick={() => setActiveTab("Home")}
           >
-            Home
+            Employees
           </p>
         </Link>
-        <Link to="/add">
+        <Link to="/tasks">
           <p
-            className={`${activeTab === "AddEmployee" ? "active" : ""}`}
-            onClick={() => setActiveTab("AddEmployee")}
+            className={`${activeTab === "Tasks" ? "active" : ""}`}
+            onClick={() => setActiveTab("Tasks")}
           >
-            Add Employee
+            Tasks
           </p>
         </Link>
       </div>
