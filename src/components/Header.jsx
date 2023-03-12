@@ -7,7 +7,7 @@ const Header = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === "/") {
+    if (location.pathname === "/employees") {
       setActiveTab("Employees");
     } else if (location.pathname === "/tasks") {
       setActiveTab("Tasks");
@@ -16,9 +16,9 @@ const Header = () => {
 
   return (
     <div className="header">
-      <p className="logo">CRUD App</p>
+      <p className="logo">Employees App</p>
       <div className="header-right">
-        <Link to="/">
+        <Link to="/employees">
           <p
             className={`${activeTab === "Employees" ? "active" : ""}`}
             onClick={() => setActiveTab("Home")}

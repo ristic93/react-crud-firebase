@@ -7,6 +7,7 @@ import { Button } from "reactstrap";
 import { Input, Select } from "../common";
 import TasksContext from "../context/TasksContext";
 import EmployeesContext from "../context/EmployeesContext";
+import Header from "../components/Header";
 
 const initialState = {
   title: "",
@@ -98,141 +99,150 @@ const Tasks = () => {
   };
 
   return (
-    <section className="task container">
-      <article className="form-wrapper">
-        <form onSubmit={handleSubmit}>
-          <h2>{isEdit ? "Edit Task" : "Add Task"}</h2>
-          <Input
-            label="Title:"
-            type="text"
-            id="title"
-            name="title"
-            placeholder="Enter title"
-            value={title}
-            onChange={handleInputChange}
-          />
-          <Input
-            label="Description:"
-            type="text"
-            id="description"
-            name="description"
-            placeholder="Enter description"
-            value={description}
-            onChange={handleInputChange}
-          />
-          <label htmlFor="salary">Status:</label>
-          <Select
-            name="assignee"
-            id="assignee"
-            onChange={handleInputChange}
-            required
-          >
-            <option selected={true} disabled>
-              Please select...
-            </option>
-            {employees.map((employee) => (
-              <option key={employee.id} value={employee.name}>
-                {employee.name}
+    <>
+      <Header />
+      <section className="task container">
+        <article className="form-wrapper">
+          <form onSubmit={handleSubmit}>
+            <h2>{isEdit ? "Edit Task" : "Add Task"}</h2>
+            <Input
+              label="Title:"
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Enter title"
+              value={title}
+              onChange={handleInputChange}
+            />
+            <Input
+              label="Description:"
+              type="text"
+              id="description"
+              name="description"
+              placeholder="Enter description"
+              value={description}
+              onChange={handleInputChange}
+            />
+            <label htmlFor="salary">Status:</label>
+            <Select
+              name="assignee"
+              id="assignee"
+              onChange={handleInputChange}
+              required
+            >
+              <option selected={true} disabled>
+                Please select...
               </option>
-            ))}
-          </Select>
-          <Input
-            label="Due date:"
-            type="date"
-            id="dueDate"
-            name="dueDate"
-            value={dueDate}
-            onChange={handleInputChange}
-          />
-          <label htmlFor="salary">Status:</label>
-          <Select
-            name="status"
-            id="status"
-            required
-            onChange={handleInputChange}
-          >
-            <option selected={true} disabled>
-              Please select...
-            </option>
-            <option value="todo">Todo</option>
-            <option value="completed">Completed</option>
-          </Select>
-          <Button type="submit" color="success">
-            {isEdit ? "Update" : "Save"}
-          </Button>
-          {isEdit && (
-            <Button color="danger" onClick={cancelEdit}>
-              Cancel
+              {employees.map((employee) => (
+                <option key={employee.id} value={employee.name}>
+                  {employee.name}
+                </option>
+              ))}
+            </Select>
+            <Input
+              label="Due date:"
+              type="date"
+              id="dueDate"
+              name="dueDate"
+              value={dueDate}
+              onChange={handleInputChange}
+            />
+            <label htmlFor="salary">Status:</label>
+            <Select
+              name="status"
+              id="status"
+              required
+              onChange={handleInputChange}
+            >
+              <option selected={true} disabled>
+                Please select...
+              </option>
+              <option value="todo">Todo</option>
+              <option value="completed">Completed</option>
+            </Select>
+            <Button type="submit" color="success">
+              {isEdit ? "Update" : "Save"}
             </Button>
-          )}
-        </form>
-      </article>
-
-      {task.length === 0 ? (
-        <h2>No tasks added yet</h2>
-      ) : (
-        <article className="data-wrapper">
-          <div className="heading-wrapper">
-            <h2>Tasks info</h2>
-            <div className="filter-option">
-              {filterOptions.map((option, idx) => (
-                <span
-                  key={idx}
-                  onClick={() => setFilter(option.value)}
-                  className={filter === option.value ? "active" : ""}
-                >
-                  {option.label}
-                </span>
-              ))}
-            </div>
-          </div>
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Description</th>
-                <th scope="col">Assignee</th>
-                <th scope="col">Due date</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentTasks.map((task, idx) => (
-                <tr key={task.id}>
-                  <th scope="row">{idx + 1}</th>
-                  <td>{task.title}</td>
-                  <td>{task.description}</td>
-                  <td>{task.assignee}</td>
-                  <td>{task.dueDate}</td>
-                  <td>
-                    <span className={`${task.status === "completed" ? "completed" : "todo"}`}>{task.status}</span>
-                  </td>
-                  <td>
-                    <Button
-                      className="mx-2"
-                      size="sm"
-                      color="success"
-                      onClick={() => handleEdit(task)}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      size="sm"
-                      color="danger"
-                      onClick={() => deleteTask(task.id)}
-                    >
-                      Remove
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            {isEdit && (
+              <Button color="danger" onClick={cancelEdit}>
+                Cancel
+              </Button>
+            )}
+          </form>
         </article>
-      )}
-    </section>
+
+        {task.length === 0 ? (
+          <h2>No tasks added yet</h2>
+        ) : (
+          <article className="data-wrapper">
+            <div className="heading-wrapper">
+              <h2>Tasks info</h2>
+              <div className="filter-option">
+                {filterOptions.map((option, idx) => (
+                  <span
+                    key={idx}
+                    onClick={() => setFilter(option.value)}
+                    className={filter === option.value ? "active" : ""}
+                  >
+                    {option.label}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Assignee</th>
+                  <th scope="col">Due date</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentTasks.map((task, idx) => (
+                  <tr key={task.id}>
+                    <th scope="row">{idx + 1}</th>
+                    <td>{task.title}</td>
+                    <td>{task.description}</td>
+                    <td>{task.assignee}</td>
+                    <td>{task.dueDate}</td>
+                    <td>
+                      <span
+                        className={`${
+                          task.status === "completed" ? "completed" : "todo"
+                        }`}
+                      >
+                        {task.status}
+                      </span>
+                    </td>
+                    <td>
+                      <Button
+                        className="mx-2"
+                        size="sm"
+                        color="success"
+                        onClick={() => handleEdit(task)}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        size="sm"
+                        color="danger"
+                        onClick={() => deleteTask(task.id)}
+                      >
+                        Remove
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </article>
+        )}
+      </section>
+    </>
   );
 };
 
