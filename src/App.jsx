@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import { AuthContext } from "./context/AuthContext";
+import  AuthContext  from "./context/AuthContext";
 
 function App() {
   const { currentUser } = useContext(AuthContext);

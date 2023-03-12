@@ -6,14 +6,14 @@ import "./register.scss";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 import { useNavigate, Link } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import AuthContext from "../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const { dispatch } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -22,7 +22,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         toast.success("Logged in successfully");
-        dispatch({ type: "LOGIN", payload: user });
+        login(user);
         navigate("/employees");
       })
       .catch((err) => {
