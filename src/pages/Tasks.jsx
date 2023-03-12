@@ -15,7 +15,7 @@ const initialState = {
   description: "",
   assignee: "",
   dueDate: "",
-  status: "",
+  // status: "",
 };
 
 const Tasks = () => {
@@ -26,7 +26,7 @@ const Tasks = () => {
   const { task, setTask, tasksCollection } = useContext(TasksContext);
   const { employees } = useContext(EmployeesContext);
 
-  const { title, description, assignee, dueDate, status } = state;
+  const { title, description, assignee, dueDate } = state;
 
   const filterOptions = [
     { label: "All", value: null },
