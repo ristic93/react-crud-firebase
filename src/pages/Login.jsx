@@ -5,8 +5,8 @@ import { toast } from "react-toastify";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 import { useNavigate, Link } from "react-router-dom";
-import AuthContext from "../context/AuthContext";
 import "./register.scss";
+import AuthContext from "../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -19,8 +19,10 @@ const Login = () => {
     e.preventDefault();
 
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
+      .then((userCredential) => {
+        const user = userCredential.user;
         toast.success("Logged in successfully");
+        login(user);
         navigate("/employees");
       })
       .catch((err) => {

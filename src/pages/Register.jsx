@@ -16,7 +16,8 @@ const Login = () => {
     e.preventDefault();
 
     createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {
+      .then((userCredential) => {
+        const user = userCredential.user;
         toast.success("Successfully registered");
         navigate("/login");
       })
