@@ -1,0 +1,17 @@
+.input-group {
+  .custom-label {
+    font-weight: 600;
+  }
+  .custom-input {
+    padding: 10px 15px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #938b8b;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+    width: 100%;
+  }
+  input::placeholder {
+    font-style: italic;
+  }
+}

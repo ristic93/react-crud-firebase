@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import "./tasks.scss";
-import { db } from "../firebase-config";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  deleteDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { db } from "../firebase/firebase.config";
+import { addDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { Button } from "reactstrap";
+import { Input, Select } from "../common";
+import TasksContext from "../context/TasksContext";
+import EmployeesContext from "../context/EmployeesContext";
 
 const initialState = {
   title: "",
@@ -22,13 +18,12 @@ const initialState = {
 
 const Tasks = () => {
   const [state, setState] = useState(initialState);
-  const [task, setTask] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [editId, setEditId] = useState(null);
+  const { task, setTask, tasksCollection } = useContext(TasksContext);
+  const { employees } = useContext(EmployeesContext);
 
   const { title, description, assignee, dueDate, status } = state;
-
-  const tasksCollection = collection(db, "tasks");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -80,25 +75,6 @@ const Tasks = () => {
     setState(initialState);
   };
 
-  // Get all tasks
-  useEffect(() => {
-    try {
-      const fetchTasks = async () => {
-        const data = await getDocs(tasksCollection);
-        const taskData = data.docs.map((doc) => {
-          return {
-            id: doc.id,
-            ...doc.data(),
-          };
-        });
-        setTask(taskData);
-      };
-      fetchTasks();
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
-
   // Delete the specified task
   const deleteTask = async (id) => {
     try {
@@ -115,8 +91,8 @@ const Tasks = () => {
       <article className="form-wrapper">
         <form onSubmit={handleSubmit}>
           <h2>{isEdit ? "Edit Task" : "Add Task"}</h2>
-          <label htmlFor="name">Title:</label>
-          <input
+          <Input
+            label="Title:"
             type="text"
             id="title"
             name="title"
@@ -124,8 +100,8 @@ const Tasks = () => {
             value={title}
             onChange={handleInputChange}
           />
-          <label htmlFor="email">Description:</label>
-          <input
+          <Input
+            label="Description:"
             type="text"
             id="description"
             name="description"
@@ -133,17 +109,24 @@ const Tasks = () => {
             value={description}
             onChange={handleInputChange}
           />
-          <label htmlFor="phone">Assignee:</label>
-          <input
-            type="text"
-            id="assignee"
+          <label htmlFor="salary">Status:</label>
+          <Select
             name="assignee"
-            placeholder="Assignee name here"
-            value={assignee}
+            id="assignee"
             onChange={handleInputChange}
-          />
-          <label htmlFor="birthDate">Due date:</label>
-          <input
+            required
+          >
+            <option selected={true} disabled>
+              Please select...
+            </option>
+            {employees.map((employee) => (
+              <option key={employee.id} value={employee.name}>
+                {employee.name}
+              </option>
+            ))}
+          </Select>
+          <Input
+            label="Due date:"
             type="date"
             id="dueDate"
             name="dueDate"
@@ -151,11 +134,21 @@ const Tasks = () => {
             onChange={handleInputChange}
           />
           <label htmlFor="salary">Status:</label>
-          <select name="status" id="status">
+          <Select
+            name="status"
+            id="status"
+            required
+            onChange={handleInputChange}
+          >
+            <option selected={true} disabled>
+              Please select...
+            </option>
+            <option value="todo">Todo</option>
             <option value="completed">Completed</option>
-            <option value="todo">Pending</option>
-          </select>
-          <input type="submit" value={isEdit ? "Update" : "Save"} />
+          </Select>
+          <Button type="submit" color="success">
+            {isEdit ? "Update" : "Save"}
+          </Button>
           {isEdit && (
             <Button color="danger" onClick={cancelEdit}>
               Cancel

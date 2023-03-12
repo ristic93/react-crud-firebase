@@ -1,34 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import "./employees.scss";
-import { db } from "../firebase-config";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  deleteDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { db } from "../firebase/firebase.config";
+import { addDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { Button } from "reactstrap";
+import { Input } from "../common";
+import EmployeesContext from "../context/EmployeesContext";
 
 const initialState = {
   name: "",
   email: "",
   phone: "",
   birthDate: "",
-  salary: ""
+  salary: "",
 };
 
 const Employees = () => {
   const [state, setState] = useState(initialState);
-  const [employees, setEmployees] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [editId, setEditId] = useState(null);
+  const { employees, setEmployees, employeesCollection } =
+    useContext(EmployeesContext);
 
   const { name, email, phone, birthDate, salary } = state;
-
-  const employeesCollection = collection(db, "employees");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -80,25 +74,6 @@ const Employees = () => {
     setState(initialState);
   };
 
-  // Get all employees
-  useEffect(() => {
-    try {
-      const fetchEmployees = async () => {
-        const data = await getDocs(employeesCollection);
-        const employeeData = data.docs.map((doc) => {
-          return {
-            id: doc.id,
-            ...doc.data(),
-          };
-        });
-        setEmployees(employeeData);
-      };
-      fetchEmployees();
-    } catch (err) {
-      console.error(err);
-    }
-  }, []);
-
   // Delete the specified employee
   const deleteEmployee = async (id) => {
     try {
@@ -115,8 +90,8 @@ const Employees = () => {
       <article className="form-wrapper">
         <form onSubmit={handleSubmit}>
           <h2>{isEdit ? "Edit Employee" : "Add Employee"}</h2>
-          <label htmlFor="name">Full Name:</label>
-          <input
+          <Input
+            label="Full Name:"
             type="text"
             id="name"
             name="name"
@@ -124,8 +99,8 @@ const Employees = () => {
             value={name}
             onChange={handleInputChange}
           />
-          <label htmlFor="email">Email:</label>
-          <input
+          <Input
+            label="Email:"
             type="email"
             id="email"
             name="email"
@@ -133,8 +108,8 @@ const Employees = () => {
             value={email}
             onChange={handleInputChange}
           />
-          <label htmlFor="phone">Phone Number :</label>
-          <input
+          <Input
+            label="Phone Number:"
             type="number"
             id="phone"
             name="phone"
@@ -142,16 +117,16 @@ const Employees = () => {
             value={phone}
             onChange={handleInputChange}
           />
-          <label htmlFor="birthDate">Date of Birth:</label>
-          <input
+          <Input
+            label="Date of Birth:"
             type="date"
             id="birthDate"
             name="birthDate"
             value={birthDate}
             onChange={handleInputChange}
           />
-          <label htmlFor="salary">Monthly Salary:</label>
-          <input
+          <Input
+            label="Monthly Salary:"
             type="number"
             id="salary"
             name="salary"
@@ -159,7 +134,9 @@ const Employees = () => {
             value={salary}
             onChange={handleInputChange}
           />
-          <input type="submit" value={isEdit ? "Update" : "Save"} />
+          <Button type="submit" color="success">
+            {isEdit ? "Update" : "Save"}
+          </Button>
           {isEdit && (
             <Button color="danger" onClick={cancelEdit}>
               Cancel
@@ -187,7 +164,7 @@ const Employees = () => {
             </thead>
             <tbody>
               {employees.map((employee, idx) => (
-                <tr key={employee.id}>
+                <tr key={idx}>
                   <th scope="row">{idx + 1}</th>
                   <td>{employee.name}</td>
                   <td>{employee.email}</td>

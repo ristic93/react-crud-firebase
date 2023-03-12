@@ -5,10 +5,10 @@ const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_API_DOMAIN,
   projectId: "react-crud-ef959",
-  storageBucket: "react-crud-ef959.appspot.com",
-  messagingSenderId: "818677155732",
-  appId: "1:818677155732:web:ee2ffa7c7bb42f4037b181",
-  measurementId: "G-XZJ2N1CDG6"
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MSG_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);
