@@ -19,8 +19,10 @@ const Employees = () => {
   const [state, setState] = useState(initialState);
   const [isEdit, setIsEdit] = useState(false);
   const [editId, setEditId] = useState(null);
+  const [search, setSearch] = useState("");
+
   const { employees, setEmployees, employeesCollection } =
-    useContext(EmployeesContext);
+  useContext(EmployeesContext);
 
   const { name, email, phone, birthDate, salary } = state;
 
@@ -149,7 +151,16 @@ const Employees = () => {
         <h2>No employees added yet</h2>
       ) : (
         <article className="data-wrapper">
-          <h2>Employees info</h2>
+          <div className="heading-wrapper">
+            <h2>Employees info</h2>
+            <Input
+              type="text"
+              className="search"
+              placeholder="Search Employee"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
           <table className="table">
             <thead>
               <tr>
@@ -163,33 +174,37 @@ const Employees = () => {
               </tr>
             </thead>
             <tbody>
-              {employees.map((employee, idx) => (
-                <tr key={idx}>
-                  <th scope="row">{idx + 1}</th>
-                  <td>{employee.name}</td>
-                  <td>{employee.email}</td>
-                  <td>{employee.phone}</td>
-                  <td>{employee.birthDate}</td>
-                  <td>$ {employee.salary}</td>
-                  <td>
-                    <Button
-                      className="mx-2"
-                      size="sm"
-                      color="success"
-                      onClick={() => handleEdit(employee)}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      size="sm"
-                      color="danger"
-                      onClick={() => deleteEmployee(employee.id)}
-                    >
-                      Remove
-                    </Button>
-                  </td>
-                </tr>
-              ))}
+              {employees
+                .filter((emp) =>
+                  emp.name.toLowerCase().includes(search.toLowerCase())
+                )
+                .map((employee, idx) => (
+                  <tr key={idx}>
+                    <th scope="row">{idx + 1}</th>
+                    <td>{employee.name}</td>
+                    <td>{employee.email}</td>
+                    <td>{employee.phone}</td>
+                    <td>{employee.birthDate}</td>
+                    <td>$ {employee.salary}</td>
+                    <td>
+                      <Button
+                        className="mx-2"
+                        size="sm"
+                        color="success"
+                        onClick={() => handleEdit(employee)}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        size="sm"
+                        color="danger"
+                        onClick={() => deleteEmployee(employee.id)}
+                      >
+                        Remove
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </article>

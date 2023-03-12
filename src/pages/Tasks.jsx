@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import "./tasks.scss";
-import { db } from "../firebase/firebase.config";
+import { db } from "../firebase.config";
 import { addDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { Button } from "reactstrap";
