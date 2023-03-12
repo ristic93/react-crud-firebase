@@ -32,9 +32,26 @@
     }
   }
   .data-wrapper {
-    h2 {
-      text-align: center;
-      margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 500px;
+    .heading-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+      .filter-option {
+        span {
+          margin-right: 10px;
+          font-weight: 600;
+          padding: 5px 10px;
+          cursor: pointer;
+        }
+        span.active {
+          border-bottom: 2px solid #000;
+        }
+      }
     }
     table {
       thead {
@@ -45,6 +62,16 @@
       tbody {
         tr {
           text-align: center;
+          td {
+            .completed {
+              color: #198754;
+              font-weight: 500;
+            }
+            .todo {
+              color: #dc3545;
+              font-weight: 500;
+            }
+          }
         }
       }
     }

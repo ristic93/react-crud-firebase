@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import "./tasks.scss";
-import { db } from "../firebase.config";
+import { db } from "../firebase/firebase.config";
 import { addDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { Button } from "reactstrap";
@@ -20,10 +20,21 @@ const Tasks = () => {
   const [state, setState] = useState(initialState);
   const [isEdit, setIsEdit] = useState(false);
   const [editId, setEditId] = useState(null);
+  const [filter, setFilter] = useState(null);
   const { task, setTask, tasksCollection } = useContext(TasksContext);
   const { employees } = useContext(EmployeesContext);
 
   const { title, description, assignee, dueDate, status } = state;
+
+  const filterOptions = [
+    { label: "All", value: null },
+    { label: "Completed", value: "completed" },
+    { label: "Todo", value: "todo" },
+  ];
+
+  const currentTasks = task.filter((task) =>
+    filter ? task.status === filter : true
+  );
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -161,7 +172,20 @@ const Tasks = () => {
         <h2>No tasks added yet</h2>
       ) : (
         <article className="data-wrapper">
-          <h2>Tasks info</h2>
+          <div className="heading-wrapper">
+            <h2>Tasks info</h2>
+            <div className="filter-option">
+              {filterOptions.map((option, idx) => (
+                <span
+                  key={idx}
+                  onClick={() => setFilter(option.value)}
+                  className={filter === option.value ? "active" : ""}
+                >
+                  {option.label}
+                </span>
+              ))}
+            </div>
+          </div>
           <table className="table">
             <thead>
               <tr>
@@ -175,14 +199,16 @@ const Tasks = () => {
               </tr>
             </thead>
             <tbody>
-              {task.map((task, idx) => (
+              {currentTasks.map((task, idx) => (
                 <tr key={task.id}>
                   <th scope="row">{idx + 1}</th>
                   <td>{task.title}</td>
                   <td>{task.description}</td>
                   <td>{task.assignee}</td>
                   <td>{task.dueDate}</td>
-                  <td>{task.status}</td>
+                  <td>
+                    <span className={`${task.status === "completed" ? "completed" : "todo"}`}>{task.status}</span>
+                  </td>
                   <td>
                     <Button
                       className="mx-2"
