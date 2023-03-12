@@ -8,6 +8,7 @@ import { Input, Select } from "../common";
 import TasksContext from "../context/TasksContext";
 import EmployeesContext from "../context/EmployeesContext";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const initialState = {
   title: "",
@@ -242,6 +243,7 @@ const Tasks = () => {
           </article>
         )}
       </section>
+      <Footer />
     </>
   );
 };

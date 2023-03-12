@@ -7,6 +7,7 @@ import { Button } from "reactstrap";
 import { Input } from "../common";
 import EmployeesContext from "../context/EmployeesContext";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const initialState = {
   name: "",
@@ -213,6 +214,7 @@ const Employees = () => {
           </article>
         )}
       </section>
+      <Footer />
     </>
   );
 };
