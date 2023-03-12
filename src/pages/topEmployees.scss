@@ -1,0 +1,28 @@
+.topEmployees {
+  text-align: center;
+  margin: 50px 0;
+}
+
+.no-employee {
+    height: 80vh;
+    text-align: center;
+}
+
+.table-wrapper {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  table {
+    thead {
+      tr {
+        text-align: center;
+      }
+    }
+    tbody {
+      tr {
+        text-align: center;
+      }
+    }
+  }
+}

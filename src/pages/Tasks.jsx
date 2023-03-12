@@ -7,15 +7,13 @@ import { Button } from "reactstrap";
 import { Input, Select } from "../components/common";
 import TasksContext from "../context/TasksContext";
 import EmployeesContext from "../context/EmployeesContext";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import { Header, Footer } from "../components";
 
 const initialState = {
   title: "",
   description: "",
   assignee: "",
-  dueDate: "",
-  // status: "",
+  dueDate: ""
 };
 
 const Tasks = () => {
@@ -130,12 +128,13 @@ const Tasks = () => {
               id="assignee"
               onChange={handleInputChange}
               required
+              defaultValue=""
             >
-              <option selected={true} disabled>
+              <option value="" selected={true} disabled>
                 Please select...
               </option>
               {employees.map((employee) => (
-                <option key={employee.id} value={employee.name}>
+                <option key={employee.id} value={employee.id}>
                   {employee.name}
                 </option>
               ))}
@@ -154,8 +153,9 @@ const Tasks = () => {
               id="status"
               required
               onChange={handleInputChange}
+              defaultValue=""
             >
-              <option selected={true} disabled>
+              <option value="" selected={true} disabled>
                 Please select...
               </option>
               <option value="todo">Todo</option>
@@ -193,13 +193,13 @@ const Tasks = () => {
             <table className="table">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Title</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Assignee</th>
-                  <th scope="col">Due date</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Action</th>
+                  <th>#</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Assignee</th>
+                  <th>Due date</th>
+                  <th>Status</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -208,7 +208,11 @@ const Tasks = () => {
                     <th scope="row">{idx + 1}</th>
                     <td>{task.title}</td>
                     <td>{task.description}</td>
-                    <td>{task.assignee}</td>
+                    <td>
+                      {employees.find(
+                        (employee) => employee.id === task.assignee
+                      )?.name ?? "DELETED"}
+                    </td>
                     <td>{task.dueDate}</td>
                     <td>
                       <span

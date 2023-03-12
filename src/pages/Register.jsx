@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Button } from "reactstrap";
 import { Input } from "../components/common";
 import { toast } from "react-toastify";
-import "./register.scss";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 import { useNavigate, Link } from "react-router-dom";
+import "./register.scss";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,8 +16,7 @@ const Login = () => {
     e.preventDefault();
 
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
+      .then(() => {
         toast.success("Successfully registered");
         navigate("/login");
       })

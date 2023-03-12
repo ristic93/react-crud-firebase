@@ -1,12 +1,10 @@
 import React, { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Employees, Tasks } from "./pages";
+import { Employees, Tasks, Login, Register, TopEmployees } from "./pages";
 import { ToastContainer } from "react-toastify";
+import AuthContext from "./context/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import  AuthContext  from "./context/AuthContext";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -34,6 +32,14 @@ function App() {
           element={
             <RequiredAuth>
               <Tasks />
+            </RequiredAuth>
+          }
+        />
+        <Route
+          path="/topemployees"
+          element={
+            <RequiredAuth>
+              <TopEmployees />
             </RequiredAuth>
           }
         />

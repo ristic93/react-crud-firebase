@@ -14,7 +14,8 @@ const Header = () => {
       setActiveTab("Employees");
     } else if (location.pathname === "/tasks") {
       setActiveTab("Tasks");
-    }
+    } else if (location.pathname === "/topemployees")
+      setActiveTab("TopEmployees");
   }, [location]);
 
   return (
@@ -35,6 +36,14 @@ const Header = () => {
             onClick={() => setActiveTab("Tasks")}
           >
             Tasks
+          </p>
+        </Link>
+        <Link to="/topemployees">
+          <p
+            className={`${activeTab === "TopEmployees" ? "active" : ""}`}
+            onClick={() => setActiveTab("TopEmployees")}
+          >
+            Top employees
           </p>
         </Link>
       </div>

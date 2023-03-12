@@ -6,8 +6,7 @@ import { toast } from "react-toastify";
 import { Button } from "reactstrap";
 import { Input } from "../components/common";
 import EmployeesContext from "../context/EmployeesContext";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import { Header, Footer } from "../components";
 
 const initialState = {
   name: "",
@@ -168,13 +167,13 @@ const Employees = () => {
             <table className="table">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Full Name</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Phone Number</th>
-                  <th scope="col">Date of birth</th>
-                  <th scope="col">Monthly salary</th>
-                  <th scope="col">Action</th>
+                  <th>#</th>
+                  <th>Full Name</th>
+                  <th>Email</th>
+                  <th>Phone Number</th>
+                  <th>Date of birth</th>
+                  <th>Monthly salary</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>

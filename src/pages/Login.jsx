@@ -2,11 +2,11 @@ import React, { useContext, useState } from "react";
 import { Button } from "reactstrap";
 import { Input } from "../components/common";
 import { toast } from "react-toastify";
-import "./register.scss";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 import { useNavigate, Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
+import "./register.scss";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -19,10 +19,8 @@ const Login = () => {
     e.preventDefault();
 
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
+      .then(() => {
         toast.success("Logged in successfully");
-        login(user);
         navigate("/employees");
       })
       .catch((err) => {
