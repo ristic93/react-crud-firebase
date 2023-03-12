@@ -4,7 +4,7 @@ import { db } from "../firebase/firebase.config";
 import { addDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { Button } from "reactstrap";
-import { Input, Select } from "../common";
+import { Input, Select } from "../components/common";
 import TasksContext from "../context/TasksContext";
 import EmployeesContext from "../context/EmployeesContext";
 import Header from "../components/Header";
@@ -23,7 +23,7 @@ const Tasks = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [editId, setEditId] = useState(null);
   const [filter, setFilter] = useState(null);
-  const { task, setTask, tasksCollection } = useContext(TasksContext);
+  const { tasks, setTasks, tasksCollection } = useContext(TasksContext);
   const { employees } = useContext(EmployeesContext);
 
   const { title, description, assignee, dueDate } = state;
@@ -34,7 +34,7 @@ const Tasks = () => {
     { label: "Todo", value: "todo" },
   ];
 
-  const currentTasks = task.filter((task) =>
+  const currentTasks = tasks.filter((task) =>
     filter ? task.status === filter : true
   );
 
@@ -92,7 +92,7 @@ const Tasks = () => {
   const deleteTask = async (id) => {
     try {
       await deleteDoc(doc(db, "tasks", id));
-      setTask(task.filter((task) => task.id !== id));
+      setTasks(tasks.filter((task) => task.id !== id));
       toast.success("Task has been deleted!");
     } catch (err) {
       console.error(err);
@@ -172,7 +172,7 @@ const Tasks = () => {
           </form>
         </article>
 
-        {task.length === 0 ? (
+        {tasks.length === 0 ? (
           <h2>No tasks added yet</h2>
         ) : (
           <article className="data-wrapper">

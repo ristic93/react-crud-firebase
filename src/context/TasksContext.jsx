@@ -5,7 +5,7 @@ import { collection, onSnapshot } from "firebase/firestore";
 const TasksContext = createContext();
 
 export const TasksProvider = ({ children }) => {
-  const [task, setTask] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
   const tasksCollection = collection(db, "tasks");
 
@@ -19,7 +19,7 @@ export const TasksProvider = ({ children }) => {
             ...doc.data(),
           };
         });
-        setTask(taskData);
+        setTasks(taskData);
       });
       return () => {
         fetchTasks();
@@ -30,7 +30,7 @@ export const TasksProvider = ({ children }) => {
   }, []);
 
   return (
-    <TasksContext.Provider value={{ task, setTask, tasksCollection }}>
+    <TasksContext.Provider value={{ tasks, setTasks, tasksCollection }}>
       {children}
     </TasksContext.Provider>
   );

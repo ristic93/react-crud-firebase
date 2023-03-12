@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "reactstrap";
-import { Input } from "../common";
+import { Input } from "../components/common";
 import { toast } from "react-toastify";
 import "./register.scss";
 import { createUserWithEmailAndPassword } from "firebase/auth";

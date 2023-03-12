@@ -4,7 +4,7 @@ import { db } from "../firebase/firebase.config";
 import { addDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { Button } from "reactstrap";
-import { Input } from "../common";
+import { Input } from "../components/common";
 import EmployeesContext from "../context/EmployeesContext";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
