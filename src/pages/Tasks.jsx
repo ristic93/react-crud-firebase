@@ -122,7 +122,7 @@ const Tasks = () => {
               value={description}
               onChange={handleInputChange}
             />
-            <label htmlFor="salary">Status:</label>
+            <label htmlFor="salary">Assignee:</label>
             <Select
               name="assignee"
               id="assignee"
