@@ -7,7 +7,7 @@
 - `React.js` & `sass` for frontend
 - `Firebase` as backend
 
-## 1. Setup Guide - Steps to Start the Application
+## Setup Guide - Steps to Start the Application
 
 - Clone the project repository from the remote repository where it is stored.
 
@@ -18,5 +18,7 @@
 - Run the `npm start` command to start the development server.
 
 - Open your web browser and go to http://localhost:3000 to see the application running.
+
+
 
 
