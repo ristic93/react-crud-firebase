@@ -227,7 +227,7 @@ const Tasks = () => {
                       <Button
                         className="mx-2"
                         size="sm"
-                        color="success"
+                        color="warning"
                         onClick={() => handleEdit(task)}
                       >
                         Edit
