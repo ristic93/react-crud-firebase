@@ -19,9 +19,5 @@
 
 - Open your web browser and go to http://localhost:3000 to see the application running.
 
-![Employees-App](https://user-images.githubusercontent.com/110178135/225747899-543804f4-03cd-4824-8ea3-c7833fa468bd.png)
-
-![Employees-App (1)](https://user-images.githubusercontent.com/110178135/225747918-81fae791-ca16-47e9-bfd5-fe55e87db83c.png)
-
-![Employees-App (2)](https://user-images.githubusercontent.com/110178135/225747933-d98fd408-da5f-48b0-be37-3849b2b7c46a.png)
+![Employees-App](https://user-images.githubusercontent.com/110178135/225748338-aaae127f-4f90-4e82-8ea3-faf74f365a6a.png)
 
