@@ -19,7 +19,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         toast.success("Successfully registered");
-        navigate("/login");
+        navigate("/");
       })
       .catch((err) => {
         console.error(err);
@@ -51,7 +51,7 @@ const Login = () => {
           Sign up
         </Button>
         <p>
-          Already have an account? <Link to="/login">Log in</Link>
+          Already have an account? <Link to="/">Log in</Link>
         </p>
       </form>
     </div>

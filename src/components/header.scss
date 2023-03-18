@@ -9,7 +9,7 @@
     font-weight: bold;
     color: #fff;
   }
-  .header-right {
+  .header-center {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,8 +23,28 @@
       color: #fff;
     }
   }
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
   .user {
     color: #fff;
     font-weight: 600;
+    span {
+      color: #000;
+    }
+  }
+  .logout {
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s linear;
+    border: 1px solid #000;
+    padding: 5px 10px;
+    border-radius: 5px;
+    &:hover {
+      border: 1px solid #fff;
+      color: #fff;
+    }
   }
 }

@@ -7,7 +7,7 @@ const Header = () => {
   const [activeTab, setActiveTab] = useState("Employees");
   const location = useLocation();
 
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, logout } = useContext(AuthContext);
 
   useEffect(() => {
     if (location.pathname === "/employees") {
@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <div className="header">
       <p className="logo">Employees App</p>
-      <div className="header-right">
+      <div className="header-center">
         <Link to="/employees">
           <p
             className={`${activeTab === "Employees" ? "active" : ""}`}
@@ -47,7 +47,14 @@ const Header = () => {
           </p>
         </Link>
       </div>
-      <p className="user">Hello: {currentUser.email}</p>
+      <div className="header-left">
+        <p className="user">
+          <span>Hello:</span> {currentUser.email}
+        </p>
+        <p className="logout" onClick={logout}>
+          Logout
+        </p>
+      </div>
     </div>
   );
 };

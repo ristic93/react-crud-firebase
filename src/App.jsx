@@ -10,15 +10,15 @@ function App() {
   const { currentUser } = useContext(AuthContext);
 
   const RequiredAuth = ({ children }) => {
-    return currentUser ? children : <Navigate to="/login" />;
+    return currentUser ? children : <Navigate to="/" />;
   };
 
   return (
     <div className="App">
       <ToastContainer position="top-center" />
       <Routes>
-        <Route path="/" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route
           path="/employees"
           element={
